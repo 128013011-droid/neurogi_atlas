@@ -19,7 +19,18 @@ function pdo(): PDO {
         PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
         PDO::ATTR_EMULATE_PREPARES   => false,
+    
     ];
+        // Cloud MySQL (TiDB) needs TLS; only enabled when NEUROGI_DB_SSL=1
+    if (getenv('NEUROGI_DB_SSL') === '1') {
+        $options[PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT] = false;
+        foreach (['/etc/pki/tls/certs/ca-bundle.crt', '/etc/ssl/certs/ca-certificates.crt', '/etc/ssl/cert.pem'] as $ca) {
+            if (is_file($ca)) {
+                $options[PDO::MYSQL_ATTR_SSL_CA] = $ca;
+                break;
+            }
+        }
+    }
 
     try {
         $pdo = new PDO($dsn, DB_USER, DB_PASS, $options);
