@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NeuroGI Atlas | Where the brain meets the gut</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <canvas id="bg"></canvas>
+
+  <header class="hero">
+    <div class="logo" aria-hidden="true">
+      <svg viewBox="0 0 64 64">
+        <defs>
+          <linearGradient id="axis" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#8b7bff"/><stop offset=".5" stop-color="#3de0c5"/><stop offset="1" stop-color="#ffb454"/>
+          </linearGradient>
+        </defs>
+        <path d="M32 18 C 8 28, 56 40, 32 50" fill="none" stroke="url(#axis)" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="32" cy="13" r="9" fill="#8b7bff"/>
+        <circle cx="32" cy="52" r="9" fill="#ffb454"/>
+      </svg>
+    </div>
+
+    <h1>NeuroGI <span>Atlas</span></h1>
+    <p class="tagline">Where the brain meets the gut</p>
+
+    <form id="searchForm" autocomplete="off">
+      <div class="field">
+        <svg class="icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+        <input id="q" type="search" placeholder="Search a subject, group, region, gene, study…" autofocus>
+        <kbd>/</kbd>
+        <button class="go" type="submit">Search</button>
+      </div>
+      <div class="scan"></div>
+    </form>
+
+    <div class="suggest-row">
+      <span>Try</span>
+      <button type="button" class="suggest" data-q="IBS">IBS</button>
+      <button type="button" class="suggest" data-q="HC">HC</button>
+      <button type="button" class="suggest" data-q="Thalamus">Thalamus</button>
+      <button type="button" class="suggest" data-q="BGA_046">BGA_046</button>
+    </div>
+  </header>
+
+  <main>
+    <div id="summary"></div>
+    <div id="results"></div>
+  </main>
+
+  <script src="bg.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
